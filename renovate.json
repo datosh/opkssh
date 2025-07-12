@@ -25,5 +25,10 @@
       "groupName": "Docker",
       "matchDatasources": ["docker"]
     }
-  ]
+  ],
+  "dockerfile": {
+    "managerFilePatterns": [
+      "**/*.Dockerfile"
+    ]
+  }
 }
