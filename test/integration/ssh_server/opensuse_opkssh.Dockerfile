@@ -1,5 +1,5 @@
 # Stage 1: Build the Go binary
-FROM golang:1.23 as builder
+FROM golang:1.24.5@sha256:14fd8a55e59a560704e5fc44970b301d00d344e45d6b914dda228e09f359a088 as builder
 
 # Set destination for COPY
 WORKDIR /app
@@ -16,7 +16,7 @@ ARG ISSUER_PORT="9998"
 RUN go build -v -o opksshbuild
 
 # Stage 2: Create a minimal openSUSE-Tumbleweed-based image
-FROM opensuse/tumbleweed:latest
+FROM opensuse/tumbleweed:latest@sha256:2d81195f7fdd14d76728065fdbcd57c95702c0aa82fc684027c64666ac30d078
 # Install dependencies required for runtime (e.g., SSH server)
 RUN zypper refresh && \
     zypper --non-interactive install sudo openssh-server openssh-clients telnet wget jq && \
@@ -36,7 +36,7 @@ RUN  echo "test:test" | chpasswd
 # Source: https://askubuntu.com/a/878705
 RUN echo "test ALL=(ALL:ALL) NOPASSWD: ALL" | tee /etc/sudoers.d/test
 
-# Create unprivileged user named "test2" 
+# Create unprivileged user named "test2"
 RUN useradd -rm -d /home/test2 -s /bin/bash -u 481 test2
 # Set password to "test"
 RUN  echo "test2:test" | chpasswd

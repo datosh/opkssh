@@ -1,5 +1,5 @@
 # Stage 1: Build the Go binary
-FROM golang:1.23 as builder
+FROM golang:1.24.5@sha256:14fd8a55e59a560704e5fc44970b301d00d344e45d6b914dda228e09f359a088 as builder
 
 # Set destination for COPY
 WORKDIR /app
@@ -16,7 +16,7 @@ ARG ISSUER_PORT="9998"
 RUN go build -v -o opksshbuild
 
 # Stage 2: Create a minimal ArchLinux-based image
-FROM quay.io/archlinux/archlinux
+FROM quay.io/archlinux/archlinux:latest@sha256:18cebbf28effab23240fc9edc10697f1e3cc3dca1b6070c35ffebe55709739a5
 # Install dependencies required for runtime (e.g., SSH server)
 RUN pacman -Syu --noconfirm && \
     pacman -Sy openssh inetutils wget jq sudo --noconfirm && \
@@ -40,7 +40,7 @@ RUN echo "test:test" | chpasswd
 # Make it so "test" user does not need to present password when using sudo
 RUN echo "test ALL=(ALL:ALL) NOPASSWD: ALL" | tee /etc/sudoers.d/test
 
-# Create unprivileged user named "test2" 
+# Create unprivileged user named "test2"
 RUN useradd -rm -d /home/test2 -s /bin/bash -u 1001 test2
 # Set password to "test"
 RUN  echo "test2:test" | chpasswd
