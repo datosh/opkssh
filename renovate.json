@@ -1,9 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests",
-    ":separateMajorReleases"
+    ":dependencyDashboard",
+    ":separateMajorReleases",
+    ":preserveSemverRanges",
+    ":semanticPrefixFixDepsChoreOthers",
+    "mergeConfidence:age-confidence-badges",
+    "replacements:all",
+    "workarounds:all",
+    "helpers:pinGitHubActionDigests"
   ],
   "commitMessagePrefix": "fix(deps): ",
   "addLabels": ["dependencies"],
@@ -25,10 +30,5 @@
       "groupName": "Docker",
       "matchDatasources": ["docker"]
     }
-  ],
-  "dockerfile": {
-    "managerFilePatterns": [
-      "**/*.Dockerfile"
-    ]
-  }
+  ]
 }
