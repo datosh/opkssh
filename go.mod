@@ -6,7 +6,7 @@ require (
 	github.com/docker/go-connections v0.5.0
 	github.com/jeremija/gosubmit v0.2.8
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51
-	github.com/lestrrat-go/jwx/v2 v2.1.6
+	github.com/lestrrat-go/jwx/v3 v3.0.12
 	github.com/melbahja/goph v1.4.0
 	github.com/openpubkey/openpubkey v0.18.0
 	github.com/spf13/cobra v1.9.1
