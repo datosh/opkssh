@@ -1,4 +1,4 @@
-FROM golang:1.25.4@sha256:f60eaa87c79e604967c84d18fd3b151b3ee3f033bcdade4f3494e38411e60963
+FROM golang:1.27.4@sha256:5e8afd493a7124a8586e134d9b532731161d4b9becf9dee5a5956b107426f93d
 
 # Update/Upgrade
 RUN apt-get update -y && apt-get upgrade -y
