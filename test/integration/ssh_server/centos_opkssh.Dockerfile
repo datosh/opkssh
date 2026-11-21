@@ -1,5 +1,5 @@
 # Stage 1: Build the Go binary
-FROM golang:1.25.4@sha256:f60eaa87c79e604967c84d18fd3b151b3ee3f033bcdade4f3494e38411e60963 as builder
+FROM golang:1.27.4@sha256:205c7636d74e0ffbe3d007162df7d74f859f5a8c8322dfb9f907977686c126cf as builder
 
 # Set destination for COPY
 WORKDIR /app
@@ -16,7 +16,7 @@ ARG ISSUER_PORT="9998"
 RUN go build -v -o opksshbuild
 
 # Stage 2: Create a minimal CentOS-based image
-FROM quay.io/centos/centos:stream9@sha256:e15ceb6e8744ccb658c6d8cb81cf2853398ca3a611f41f0b8e2fce655361190d
+FROM quay.io/centos/centos:stream9@sha256:875f628a88425be59d5edf2aa81e9836dd803de564ce3f728f23c63660d65662
 # Install dependencies required for runtime (e.g., SSH server)
 RUN dnf update -y && \
     dnf install -y sudo openssh-server openssh-clients telnet wget jq && \
